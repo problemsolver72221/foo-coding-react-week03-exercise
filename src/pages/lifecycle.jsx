@@ -7,6 +7,7 @@ class LifeCycle extends Component {
   state = {
     //initialize response and error props
     response: [],
+    expressContent: [],
     error: ""
   };
 
@@ -20,7 +21,7 @@ class LifeCycle extends Component {
     console.log("App - Mounted");
   }
 
-  // Fetch data from endpoint:
+  // Fetch data from remote endpoint:
 
   async fetchData() {
     // simple error handling - try to change api url inside get method to see.
@@ -31,6 +32,25 @@ class LifeCycle extends Component {
     } catch (error) {
       console.error(error);
       this.setState({ error: error.message });
+    }
+  }
+
+  // With "getLocalExpressData()"" function you can get data from your local express server.
+  // Make sure to run the server first to get the results.
+  // In order to connect to Express from React, you need to add proxy on your React package.json as it follows:
+  // "proxy": "http://localhost:5000"
+  // By doing this, you let React know that you will use this proxy on http requests.
+  // After setting the proxy, you will only include the endpoints instead of full url.
+  // For example, to get the data from "http://localhost:5000/api/todos",
+  // you can make the call to the "/api/todos" as seen below.
+  // Click the "Get Express Data on console.log()" button on the page to see your Express response on console.
+
+  async getLocalExpressData() {
+    try {
+      const expressContent = await axios.get("/api/todos");
+      console.log(expressContent);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -61,6 +81,9 @@ class LifeCycle extends Component {
             </p>
           ) : null}
         </div>
+        <button onClick={this.getLocalExpressData}>
+          Get Express Data on console.log()
+        </button>
       </div>
     );
   }
