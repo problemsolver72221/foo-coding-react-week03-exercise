@@ -35,7 +35,7 @@ class LifeCycle extends Component {
     }
   }
 
-  // With "getLocalExpressData()"" function you can get data from your local express server.
+  // With "getLocalExpressData()" function you can get data from your local express server.
   // Make sure to run the server first to get the results.
   // In order to connect to Express from React, you need to add proxy on your React package.json as it follows:
   // "proxy": "http://localhost:5000"
